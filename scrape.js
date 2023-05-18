@@ -1,6 +1,6 @@
 const { JSDOM } = require('jsdom')
 
-async function crawlPage(baseURL, currentURL, pages) {
+async function scrapePage(baseURL, currentURL, pages) {
 
     const baseURLObj = new URL(baseURL)
     const currentURLObj = new URL(currentURL)
@@ -17,7 +17,7 @@ async function crawlPage(baseURL, currentURL, pages) {
 
     pages[normalizedCurrentURL] = 1
 
-    console.log(`Actively Crawling ${currentURL}`)
+    console.log(`Actively Scraping ${currentURL}`)
 
     try {
         const resp = await fetch(currentURL)
@@ -38,7 +38,7 @@ async function crawlPage(baseURL, currentURL, pages) {
         const nextURLS = getURLsFromHTML(htmlBody, baseURL)
 
         for (const nextURL of nextURLS) {
-            pages = await crawlPage(baseURL, nextURL, pages)
+            pages = await scrapePage(baseURL, nextURL, pages)
         }
         return pages
 
@@ -86,5 +86,5 @@ function normalizeURL(urlString) {
 module.exports = {
     normalizeURL,
     getURLsFromHTML,
-    crawlPage
+    scrapePage
 }
