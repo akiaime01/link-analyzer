@@ -34,7 +34,7 @@ test('getURLSFromHTML absolute', () => {
 <html>
     <body>
         <a href = "https://andrew.dev/path/">
-            andrew.dev Blog
+            andrew.dev
         </a>
     </body>
 </html>
@@ -50,7 +50,7 @@ test('getURLSFromHTML relative', () => {
 <html>
     <body>
         <a href = "/path/">
-            andrew.dev Blog
+            andrew.dev
         </a>
     </body>
 </html>
@@ -69,7 +69,7 @@ test('getURLSFromHTML both', () => {
             andrew.dev Blog Path 1
         </a>
         <a href = "/path2/">
-            andrew.dev Blog Path 2
+            andrew.dev
         </a>
     </body>
 </html>
@@ -85,7 +85,7 @@ test('getURLSFromHTML invalid', () => {
 <html>
     <body>
         <a href = "invalid">
-            andrew.dev Blog
+            andrew.dev
         </a>
     </body>
 </html>

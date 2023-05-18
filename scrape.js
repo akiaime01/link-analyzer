@@ -20,20 +20,20 @@ async function scrapePage(baseURL, currentURL, pages) {
     console.log(`Actively Scraping ${currentURL}`)
 
     try {
-        const resp = await fetch(currentURL)
+        const response = await fetch(currentURL)
 
-        if (resp.status > 399) {
-            console.log(`error in fetch with status code ${resp.status} on page: ${currentURL}`)
+        if (response.status > 399) {
+            console.log(`error in fetch with status code ${response.status} on page: ${currentURL}`)
             return pages
         }
 
-        const contentType = resp.headers.get("content-type")
+        const contentType = response.headers.get("content-type")
         if (!contentType.includes("text/html")) {
             console.log(`non html response, content type: ${contentType} on page: ${currentURL}`)
             return pages
         }
 
-        const htmlBody = await resp.text()
+        const htmlBody = await response.text()
 
         const nextURLS = getURLsFromHTML(htmlBody, baseURL)
 
@@ -58,14 +58,14 @@ function getURLsFromHTML(htmlBody, baseURL) {
             try {
                 urls.push(new URL(linkElement.href, baseURL).href)
             } catch (err) {
-                console.log(`error with relative url: ${err.message}`)
+               // console.log(`error with relative url: ${err.message}`)
             }
         } else {
             // absolute
             try {
                 urls.push(new URL(linkElement.href).href)
             } catch (err) {
-                console.log(`error with absolute url: ${err.message}`)
+                // console.log(`error with absolute url: ${err.message}`)
             }
         }
     }
