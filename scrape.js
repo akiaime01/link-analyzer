@@ -5,17 +5,19 @@ async function scrapePage(baseURL, currentURL, pages) {
     const baseURLObj = new URL(baseURL)
     const currentURLObj = new URL(currentURL)
 
-    if (baseURLObj.hostname !== currentURLObj.hostname) {
-        return pages
-    }
 
     const normalizedCurrentURL = normalizeURL(currentURL)
     if (pages[normalizedCurrentURL] > 0) {
         pages[normalizedCurrentURL]++
         return pages
+    } 
+    pages[normalizedCurrentURL] = 1
+
+    if (baseURLObj.hostname !== currentURLObj.hostname) {
+        console.log(`EXTERNAL URL FOUND: ${currentURL}`)
+        return pages
     }
 
-    pages[normalizedCurrentURL] = 1
 
     console.log(`Actively Scraping ${currentURL}`)
 
