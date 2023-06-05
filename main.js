@@ -1,22 +1,37 @@
-const {scrapePage} = require('./scrape.js')
-const {printReport} = require('./report.js')
+const { scrapePage } = require('./scrape.js')
+const { printReport } = require('./report.js')
+const { app, BrowserWindow } = require('electron')
 
 async function main() {
-    if (process.argv.length < 3) {
-        console.log("No Website Provided")
-        process.exit(1)
+
+    const createWindow = () => {
+        const win = new BrowserWindow({
+            width: 800,
+            height: 600
+        })
+
+        win.loadFile('index.html')
     }
 
-    if (process.argv.length > 3) {
-        console.log("Too Many Command Line Arguments")
-        process.exit(1)
-    }
+    app.whenReady().then(() => {
+        createWindow()
+      })
 
-    const baseURL = process.argv[2]
+    // if (process.argv.length < 3) {
+    //     console.log("No Website Provided")
+    //     process.exit(1)
+    // }
 
-    console.log(`Starting Crawl of ${baseURL}`)
-    const pages = await scrapePage(baseURL, baseURL, {})
-    printReport(pages)
+    // if (process.argv.length > 3) {
+    //     console.log("Too Many Command Line Arguments")
+    //     process.exit(1)
+    // }
+
+    // const baseURL = process.argv[2]
+
+    // console.log(`Starting Crawl of ${baseURL}`)
+    // const pages = await scrapePage(baseURL, baseURL, {})
+    // printReport(pages)
 }
 
 main()
