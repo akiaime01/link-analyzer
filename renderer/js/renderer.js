@@ -24,7 +24,6 @@ async function scrapePage(baseURL, currentURL, pages) {
     const baseURLObj = new URL(baseURL)
     const currentURLObj = new URL(currentURL)
 
-
     const normalizedCurrentURL = normalizeURL(currentURL)
     if (pages[normalizedCurrentURL] > 0) {
         pages[normalizedCurrentURL]++
@@ -163,6 +162,7 @@ function alertError(message) {
         }
     }).showToast()
 }
+
 function alertSuccess(message) {
     Toastify({
         text: message,
