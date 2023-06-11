@@ -1,10 +1,11 @@
 {
   "name": "webscraper",
+  "productName": "Easy Link Analyzer",
   "version": "1.0.0",
-  "description": "webscraper for capstone project",
+  "description": "link analyzer for capstone project",
   "main": "main.js",
   "scripts": {
-    "start": "node --no-warnings main.js",
+    "start": "electron .",
     "test": "jest"
   },
   "repository": {
@@ -18,9 +19,11 @@
   },
   "homepage": "https://github.com/akiaime01/webscraper#readme",
   "devDependencies": {
+    "electron": "^25.0.1",
     "jest": "^29.5.0"
   },
   "dependencies": {
-    "jsdom": "^22.0.0"
+    "jsdom": "^22.0.0",
+    "toastify-js": "^1.12.0"
   }
 }
