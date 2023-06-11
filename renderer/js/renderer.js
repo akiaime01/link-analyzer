@@ -1,11 +1,20 @@
 const { JSDOM } = require('jsdom')
+const Toastify = require('toastify-js')
 
 async function getReportOnClick() {
+    spinnerOn()
     const url = document.querySelector('#url')
     console.log(url.value)
-    const pages = await scrapePage(url.value, url.value, {})
-    const csvdata = csvMaker(pages)
-    download(csvdata)
+    try {
+        const pages = await scrapePage(url.value, url.value, {})
+        const csvdata = csvMaker(pages)
+        download(csvdata)
+        spinnerOff()
+        alertSuccess(url.value+ " Successfully Analyzed!")
+    } catch(err) {
+        alertError("Please Enter a Valid URL")
+        spinnerOff()
+    }
 }
 
 async function scrapePage(baseURL, currentURL, pages) {
@@ -133,6 +142,38 @@ function sortPages(pages) {
         return bHits - aHits
     })
     return pagesArr
+}
+
+function spinnerOn() {
+    document.getElementsByClassName("loader")[0].style.display = "block";
+}
+function spinnerOff() {
+    document.getElementsByClassName("loader")[0].style.display = "none";
+}
+
+function alertError(message) {
+    Toastify({
+        text: message,
+        duration: 5000,
+        close: false,
+        style: {
+            background: 'red',
+            color: 'white',
+            textAlign: 'center'
+        }
+    }).showToast()
+}
+function alertSuccess(message) {
+    Toastify({
+        text: message,
+        duration: 5000,
+        close: false,
+        style: {
+            background: 'green',
+            color: 'white',
+            textAlign: 'center'
+        }
+    }).showToast()
 }
 
 
