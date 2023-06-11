@@ -4,6 +4,7 @@ const Toastify = require('toastify-js')
 async function getReportOnClick() {
     spinnerOn()
     document.getElementsByClassName("button1")[0].style.display = "none";
+    document.getElementsByClassName("advancedSearchTextBox")[0].style.display = "none";
     const url = document.querySelector('#url')
     try {
         const pages = await scrapePage(url.value, url.value, {})
@@ -12,10 +13,12 @@ async function getReportOnClick() {
         spinnerOff()
         alertSuccess(url.value+ " Successfully Analyzed!")
         document.getElementsByClassName("button1")[0].style.display = "block";
+        document.getElementsByClassName("advancedSearchTextBox")[0].style.display = "block";
     } catch(err) {
         alertError("Please Enter a Valid URL")
         spinnerOff()
         document.getElementsByClassName("button1")[0].style.display = "block";
+        document.getElementsByClassName("advancedSearchTextBox")[0].style.display = "block";
     }
 }
 

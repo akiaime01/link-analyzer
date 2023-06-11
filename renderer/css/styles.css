@@ -1,7 +1,6 @@
 body {
     background-color: #343d46
 }
-
 h1 {
     color: gainsboro;
 }
@@ -85,6 +84,12 @@ input[type=text] {
 
 span + span {
     margin-left: 10px;
+}
+
+.about {
+    display: block;
+    margin: auto;
+    width: 40%;
 }
 
 

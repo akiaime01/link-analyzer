@@ -7,7 +7,7 @@ async function main() {
   const createWindow = () => {
     const mainWindow = new BrowserWindow({
       width: 500,
-      height: 200,
+      height: 250,
       webPreferences: {
         nodeIntegration: true,
         contextIsolation: false,
@@ -20,7 +20,7 @@ async function main() {
     const aboutWindow = new BrowserWindow({
       title: 'About Link Analyzer',
       width: 300,
-      height: 200
+      height: 250
     });
     aboutWindow.loadFile(path.join(__dirname, './renderer/html/about.html'))
   }
