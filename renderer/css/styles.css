@@ -7,7 +7,11 @@ h1 {
 }
 
 p {
-    color: red;
+    color: gainsboro;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
 }
 
 * {

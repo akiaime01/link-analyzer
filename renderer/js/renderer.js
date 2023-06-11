@@ -3,17 +3,19 @@ const Toastify = require('toastify-js')
 
 async function getReportOnClick() {
     spinnerOn()
+    document.getElementsByClassName("button1")[0].style.display = "none";
     const url = document.querySelector('#url')
-    console.log(url.value)
     try {
         const pages = await scrapePage(url.value, url.value, {})
         const csvdata = csvMaker(pages)
         download(csvdata)
         spinnerOff()
         alertSuccess(url.value+ " Successfully Analyzed!")
+        document.getElementsByClassName("button1")[0].style.display = "block";
     } catch(err) {
         alertError("Please Enter a Valid URL")
         spinnerOff()
+        document.getElementsByClassName("button1")[0].style.display = "block";
     }
 }
 
@@ -34,8 +36,6 @@ async function scrapePage(baseURL, currentURL, pages) {
         //console.log(`EXTERNAL URL FOUND: ${currentURL}`)
         return pages
     }
-
-
     console.log(`Actively Scraping ${currentURL}`)
 
     try {
@@ -154,7 +154,7 @@ function spinnerOff() {
 function alertError(message) {
     Toastify({
         text: message,
-        duration: 5000,
+        duration: 3000,
         close: false,
         style: {
             background: 'red',
@@ -166,7 +166,7 @@ function alertError(message) {
 function alertSuccess(message) {
     Toastify({
         text: message,
-        duration: 5000,
+        duration: 3000,
         close: false,
         style: {
             background: 'green',

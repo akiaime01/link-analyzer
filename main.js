@@ -1,5 +1,6 @@
 const path = require('path');
-const { app, BrowserWindow, Menu } = require('electron')
+const { app, BrowserWindow, Menu } = require('electron');
+const { create } = require('domain');
 
 const isDev = process.env.NODE_ENV !== 'production'
 
@@ -26,12 +27,8 @@ async function main() {
   const createAboutWindow = () => {
     const aboutWindow = new BrowserWindow({
       title: 'About Link Analyzer',
-      width: 400,
-      height: 400,
-      webPreferences: {
-        nodeIntegration: true,
-        contextIsolation: false,
-      }
+      width: 300,
+      height: 200
     });
     aboutWindow.loadFile(path.join(__dirname, './renderer/html/about.html'))
   }
@@ -39,7 +36,6 @@ async function main() {
   // App is Ready
   app.whenReady().then(() => {
     createWindow();
-
     const mainMenu = Menu.buildFromTemplate(template);
     Menu.setApplicationMenu(mainMenu);
   });
@@ -49,6 +45,10 @@ async function main() {
     {
       label: 'Edit',
       submenu: [
+        {
+          label: 'About',
+          click: createAboutWindow
+        },
         {
           role: 'undo'
         },
