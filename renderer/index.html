@@ -3,12 +3,13 @@
   <head>
     <meta charset="UTF-8">
     <script src="js/renderer.js" defer></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Andrew's Link Analyzer</title>
   </head>
   <body>
     <h1>Andrew's Link Analyzer</h1>
-    <input type="text" id="url" value="Enter URL Here">
-    <button type="button" id="startButton">Start</button>
+    <p><input type="text" id="url" value=""></p>
+    <button type="button" accesskey="Enter" onclick="getReportOnClick()" id="startButton">Start</button>
 
   </body>
 </html>

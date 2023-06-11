@@ -1,5 +1,3 @@
-const { scrapePage } = require('./scrape.js')
-const { printReport } = require('./report.js')
 const path = require('path');
 const { app, BrowserWindow, Menu } = require('electron')
 
@@ -11,7 +9,11 @@ async function main() {
     const createWindow = () => {
         const mainWindow = new BrowserWindow({
             width: isDev ? 1000 : 500,
-            height: 500
+            height: 500,
+            webPreferences: {
+                nodeIntegration: true,
+                contextIsolation: false,
+            }
         });
 
         // Open Dev tools If In Dev environemtn
@@ -25,7 +27,11 @@ async function main() {
         const aboutWindow = new BrowserWindow({
             title:'About Link Analyzer',
             width: 400,
-            height: 400
+            height: 400,
+            webPreferences: {
+                nodeIntegration: true,
+                contextIsolation: false,
+            }
         });
         aboutWindow.loadFile(path.join(__dirname, './renderer/about.html'))
     }
@@ -53,7 +59,43 @@ async function main() {
                     click: () => app.quit(),
                     accelerator: 'CmdOrCtrl+Q'
                 }
-            ]
+            ],
+            label: "Edit",
+            submenu: [
+                {
+                  label: "Undo",
+                  accelerator: "CmdOrCtrl+Z",
+                  selector: "undo:"
+                },
+                {
+                  label: "Redo",
+                  accelerator: "Shift+CmdOrCtrl+Z",
+                  selector: "redo:"
+                },
+                {
+                  type: "separator"
+                },
+                {
+                  label: "Cut",
+                  accelerator: "CmdOrCtrl+X",
+                  selector: "cut:"
+                },
+                {
+                  label: "Copy",
+                  accelerator: "CmdOrCtrl+C",
+                  selector: "copy:"
+                },
+                {
+                  label: "Paste",
+                  accelerator: "CmdOrCtrl+V",
+                  selector: "paste:"
+                },
+                {
+                  label: "Select All",
+                  accelerator: "CmdOrCtrl+A",
+                  selector: "selectAll:"
+                }
+              ]
         }
       ]
     // if (process.argv.length < 3) {
