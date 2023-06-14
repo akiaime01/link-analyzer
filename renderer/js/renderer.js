@@ -98,14 +98,6 @@ function normalizeURL(urlString) {
     return hostPath
 }
 
-function printReport(pages) {
-    const sortedPages = sortPages(pages)
-    for (const sortedPage of sortedPages) {
-        const url = sortedPage[0]
-        const hits = sortedPage[1]
-        console.log(`Found ${hits} links to page: ${url}`)
-    }
-}
 
 function csvMaker(pages) {
     csvRows = []
@@ -175,13 +167,4 @@ function alertSuccess(message) {
             textAlign: 'center'
         }
     }).showToast()
-}
-
-
-module.exports = {
-    normalizeURL,
-    getURLsFromHTML,
-    scrapePage,
-    sortPages,
-    printReport
 }
